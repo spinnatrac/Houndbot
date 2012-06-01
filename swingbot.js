@@ -83,6 +83,8 @@ bot.on('speak', function (data) {
       text.toLowerCase() == "houndbot swingout" ||
       text.toLowerCase() == "houndbot california routine" ||
       text.toLowerCase() == "houndbot shake that thing" ||
+      text.toLowerCase() == "houndbot stops" ||
+      text.toLowerCase() == "houndbot balboa" ||
       text.toLowerCase() == "houndbot bust a move"){
       bot.vote('up');
    }
