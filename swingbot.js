@@ -115,6 +115,40 @@ bot.on('speak', function (data) {
          }
       });
    }
-            
+   if(text.substring(0, 13).toLowerCase() == "houndbot boot"){
+      bot.roomInfo(false, function(roomInfo){
+         if(roomInfo.room.metadata.moderator_id.indexOf(data.userid) != -1){
+            //Moderator is speaking, give them the boot
+            if(text.toLowerCase() == "houndbot boot dj"){
+            	bot.bootUser(roomInfo.metadata.current_dj)
+            } else {
+            var idx = 0;
+            for(; idx < roomInfo.users.length && 
+                roomInfo.users[idx].name.toLowerCase() != text.substring(13).replace(/\s/g, "").toLowerCase(); idx++);
+            if(idx < roomInfo.users.length){
+               bot.bootUser(roomInfo.users[idx].userid, "");
+            }
+            }
+         }
+      });
+   }
+   if(text.substring(0, 15).toLowerCase() == "houndbot remove"){
+      bot.roomInfo(false, function(roomInfo){
+         if(roomInfo.room.metadata.moderator_id.indexOf(data.userid) != -1){
+            //Moderator is speaking, remove troll from DJ stand
+            if(text.length == 15 || text.length == 16 || text.toLowerCase() == "hounbot remove dj"){
+            	bot.remDj(roomInfo.metadata.current_dj)
+            } else {
+            var idx = 0;
+            for(; idx < roomInfo.users.length && 
+                roomInfo.users[idx].name.toLowerCase() != text.substring(15).replace(/\s/g, "").toLowerCase(); idx++);
+            if(idx < roomInfo.users.length){
+               bot.remDj(roomInfo.users[idx].userid, "");
+            }
+         }
+        
+      });
+   }
+   }
       
 });
